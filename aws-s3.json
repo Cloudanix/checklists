@@ -1,0 +1,85 @@
+{
+  "description": "Checklist to ensure your AWS S3 buckets are secure and do not get compromised with user data. It lists down all the best practices your team could use as a checklist for better security, higher operational efficiency and lower costs.",
+  "items": [
+    {
+      "item": "Check whether log metric filter and alarm exist for S3 bucket policy changes",
+      "data_type": "yes/no",
+      "category": "Logs",
+      "severity": "High"
+    },
+    {
+      "item": "Check the S3 bucket access logging is enabled on the CloudTrail S3 bucket",
+      "data_type": "yes/no",
+      "category": "Logs",
+      "severity": "Medium",
+      "additional_description": "Ensure that S3 access logging is activated and that you are analyzing logs regularly. S3 logs will assist in security audits and will help analyze S3 usage bills and user behavior."
+    },
+    {
+      "item": "Check the S3 bucket CloudTrail logs to is not publicly accessible",
+      "data_type": "yes/no",
+      "category": "Security",
+      "severity": "High"
+    },
+    {
+      "item": "Check if S3 buckets have default encryption (SSE) enabled or use a bucket policy to enforce it.",
+      "data_type": "yes/no",
+      "category": "Security",
+      "severity": "High"
+    },
+    {
+      "item": "Check if CloudFront distributions are set to HTTPS",
+      "data_type": "yes/no",
+      "category": "Security",
+      "severity": "High"
+    },
+    {
+      "item": "Check if S3 buckets have object versioning enabled",
+      "data_type": "yes/no",
+      "category": "Operational Efficiency",
+      "severity": "Medium",
+      "additional_description": "Ensure that you are using S3 versioning to save, retrieve, and restore any previous version of an object stored in the Amazon S3 bucket."
+    },
+    {
+      "item": "Check if S3 buckets have secure transport policy",
+      "data_type": "yes/no",
+      "category": "Security",
+      "severity": "High",
+      "additional_description": "Ensure that inbound and outbound traffic data is encrypted using S3 SSL endpoints."
+    },
+    {
+      "item": "Check if CloudFront distributions have Field Level Encryption enabled",
+      "data_type": "yes/no",
+      "category": "Security",
+      "severity": "Medium"
+    },
+    {
+      "item": "Ensure your S3 buckets have policies which do not allow WRITE access",
+      "data_type": "yes/no",
+      "category": "Security",
+      "severity": "High",
+      "additional_description": "Ensure that no public access buckets are created and that they are using S3 Bucket or IAM policies."
+    },
+    {
+      "item": "Bucket names are DNS compliant",
+      "data_type": "yes/no",
+      "category": "Operational Efficiency",
+      "severity": "Medium",
+      "additional_description": "Ensure that your AWS S3 buckets are using DNS-compliant bucket names in order to adhere to AWS best practices and to benefit from new S3 features such as S3 Transfer Acceleration. Thus avoid using \".\" in your bucket name instead you can use \"-\". For e.g. \"cloudanix.bucket\" would be a bad name to use, instead use \"cloudanix-bucket\".\n"
+    },
+    {
+      "item": "S3 buckets have default encryption enabled.",
+      "data_type": "yes/no",
+      "category": "Security",
+      "severity": "High",
+      "additional_description": "When objects are stored on S3, it's a recommended practice to enable server side encryption. Either you use AWS S3-managed keys (SSE-S3) or AWS KMS-managed keys (SSE-KMS). You can read more about it at https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html"
+    }
+  ],
+  "sources": [
+    {
+      "link": "https://docs.aws.amazon.com/AmazonS3/latest/dev/Welcome.html"
+    },
+    {
+      "link": "https://www.xplg.com/s3-security-buckets/"
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "description": "If you have API, follow this checklist to ensure that they are secure and do not fall victim to malicious users.",
+  "items": [
+    {
+      "item": "Does your API use standard authentication like JWT, Oauth",
+      "data_type": "yes/no",
+      "category": "Authentication",
+      "severity": "High",
+      "additional_description": "Do not use Basic auth as your authentication mechanism. Basic Authentication is the simplest form of HTTP authentication. With each request, users submit their credentials as plain and potentially unencrypted HTTP fields.\n\nRead about JWT at https://jwt.io/ and Oauth at https://oauth.net/ to learn more."
+    },
+    {
+      "item": "JWT token doesn't store any sensitive or identifying information",
+      "data_type": "yes/no",
+      "category": "Authentication",
+      "severity": "High",
+      "additional_description": "Ensure that your jwt token should not store identifying information like user passwords, account ids, credit card related information or any such parameters which can be used in reverse-engineering. One common mistake we make is to put database ids in such token, which a malicious actor uses to run a loop and see if they can sneak in."
+    },
+    {
+      "item": "Do you use a random complicated key (JWT Secret) to make brute forcing the token very hard?",
+      "data_type": "yes/no",
+      "category": "Authentication",
+      "severity": "Medium",
+      "additional_description": "Do not make it easy for the bad actors to guess the algorithrm behind the token generation."
+    },
+    {
+      "item": "Ensure that the authentication token expires",
+      "data_type": "yes/no",
+      "category": "Authentication",
+      "severity": "Medium",
+      "additional_description": "Your authentication tokens should have an expiration date and time."
+    },
+    {
+      "item": "Encrypt everything",
+      "data_type": "yes/no",
+      "category": "Data Security",
+      "severity": "Medium",
+      "additional_description": "Ensure that the entire traffic between your client and server and also within various components within your own servers (db, web, cache etc) is encrypted. "
+    },
+    {
+      "item": "Is user input validated?",
+      "data_type": "yes/no",
+      "category": "Data validation",
+      "severity": "High",
+      "additional_description": "Even if your UI is validating user input, your API should be guarding the quality of data going inside the database. This also avoids common vulnerabilities (e.g. XSS, SQL-Injection, Remote Code Execution, etc.).\n\n- SQL Injection: A user submits a malicious database query as input. If the application passes input directly to a database, the database will run the query.\n- Remote Code Execution: A user submits a command as input. If the application passes input directly to a shell or external application, the server will run the command.\n- Cross-Site Scripting (XSS): A user submits JavaScript as input. If a browser renders the field containing this JavaScript, the browser will execute the code."
+    },
+    {
+      "item": "API doesn't return sensitive information about the user",
+      "data_type": "yes/no",
+      "category": "Data Security",
+      "severity": "High",
+      "additional_description": "A common mistake seen is object.to_json which ends up sending all the columns of that entity. Now there are certain objects like user which could contain fields like password, salt and other sensitive information which should not be passed under any condition."
+    },
+    {
+      "item": "API endpoints which require authenticated, do they ensure that?",
+      "data_type": "yes/no",
+      "category": "Security",
+      "severity": "High",
+      "additional_description": "Ensure timely review is done especially when a new endpoint is being released to make sure these are following the required authentication logic."
+    },
+    {
+      "item": "Limit requests (Throttling) to avoid DDoS / brute-force attacks.",
+      "data_type": "yes/no",
+      "category": "Stability",
+      "severity": "High"
+    },
+    {
+      "item": "Use HTTPS on server side to avoid MITM (Man in the Middle Attack).",
+      "data_type": "yes/no",
+      "category": "Security",
+      "severity": "High"
+    },
+    {
+      "item": "Use HSTS header with SSL to avoid SSL Strip attack.",
+      "data_type": "yes/no",
+      "category": "Security",
+      "severity": "High"
+    },
+    {
+      "item": "Use the proper HTTP method according to the operation:",
+      "data_type": "yes/no",
+      "category": "Standards",
+      "severity": "Medium",
+      "additional_description": "GET (read), POST (create), PUT/PATCH (replace/update), and DELETE (to delete a record), and respond with 405 Method Not Allowed if the requested method isn't appropriate for the requested resource."
+    },
+    {
+      "item": "Validate content-type on request Accept header",
+      "data_type": "yes/no",
+      "category": "Standards",
+      "severity": "High",
+      "additional_description": "(Content Negotiation) to allow only your supported format (e.g. application/xml, application/json, etc.) and respond with 406 Not Acceptable response if not matched."
+    },
+    {
+      "item": "Avoid Using Auto-Incrementing IDs. Use UUID instead.",
+      "data_type": "yes/no",
+      "category": "Security",
+      "severity": "High",
+      "additional_description": "Auto-incrementing IDs make it trivial for attackers to guess the URL of resources they may not have access to. Instead, use universally unique identifiers (UUID) to identify resources."
+    },
+    {
+      "item": "If you are parsing XML files, make sure entity parsing is not enabled to avoid XXE (XML external entity attack).",
+      "data_type": "yes/no",
+      "category": "Standards",
+      "severity": "High"
+    },
+    {
+      "item": "If you are parsing XML files, make sure entity expansion is not enabled to avoid Billion Laughs/XML bomb via exponential entity expansion attack.",
+      "data_type": "yes/no",
+      "category": "Standards",
+      "severity": "High"
+    },
+    {
+      "item": " If you are dealing with huge amount of data, use Workers and Queues to process as much as possible in background and return response fast to avoid HTTP Blocking.",
+      "data_type": "yes/no",
+      "category": "Stability",
+      "severity": "Medium"
+    },
+    {
+      "item": "Send X-Content-Type-Options: nosniff header.",
+      "data_type": "yes/no",
+      "category": "Output",
+      "severity": "Medium",
+      "additional_description": "To read more about this header see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options"
+    },
+    {
+      "item": "Send X-Frame-Options: deny header.",
+      "data_type": "yes/no",
+      "category": "Output",
+      "severity": "Medium",
+      "additional_description": "To read more about this header see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options"
+    },
+    {
+      "item": "Send Content-Security-Policy: default-src 'none' header.",
+      "data_type": "yes/no",
+      "category": "Output",
+      "severity": "Medium"
+    },
+    {
+      "item": "Remove fingerprinting headers - X-Powered-By, Server, X-AspNet-Version, etc.",
+      "data_type": "yes/no",
+      "category": "Output",
+      "severity": "Medium"
+    },
+    {
+      "item": "Force content-type for your response. If you return application/json, then your content-type response is application/json.",
+      "data_type": "yes/no",
+      "category": "Output",
+      "severity": "Low"
+    },
+    {
+      "item": "Don't return sensitive data like credentials, Passwords, or security tokens.",
+      "data_type": "yes/no",
+      "category": "Data Security",
+      "severity": "High"
+    },
+    {
+      "item": "Return the proper status code according to the operation completed. (e.g. 200 OK, 400 Bad Request, 401 Unauthorized, 405 Method Not Allowed, etc.).",
+      "data_type": "yes/no",
+      "category": "Output",
+      "severity": "Medium"
+    }
+  ],
+  "sources": [
+    {
+      "link": "https://github.com/shieldfy/API-Security-Checklist"
+    },
+    {
+      "link": "https://www.templarbit.com/blog/2018/01/10/api-security-checklist/"
+    }
+  ]
+}
